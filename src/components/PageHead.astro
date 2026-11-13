@@ -1,9 +1,9 @@
 ---
-interface Props { title: string; tone: 'berry' | 'mint' | 'lilac' | 'custard'; blurb?: string }
-const { title, tone, blurb } = Astro.props;
+interface Props { title: string; blurb?: string; tone?: string }
+const { title, blurb } = Astro.props;
 ---
 
-<header class={`page-head tone-${tone}`}>
+<header class="page-head">
   <h1>{title}</h1>
   {blurb && <p>{blurb}</p>}
 </header>

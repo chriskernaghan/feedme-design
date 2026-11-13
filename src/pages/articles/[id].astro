@@ -7,7 +7,8 @@ import Sources from '../../components/Sources.astro';
 import DatasetBox from '../../components/DatasetBox.astro';
 import KeyFinding from '../../components/KeyFinding.astro';
 import Avatar from '../../components/Avatar.astro';
-import { SITE, TYPE_LABELS, TYPE_TONE, formatDate, isoDate, topicLabel, getArticles } from '../../lib/site';
+import Cover from '../../components/Cover.astro';
+import { SITE, TYPE_LABELS, TYPE_TONE, formatDate, isoDate, topicLabel, getArticles, readingTime } from '../../lib/site';
 
 export const getStaticPaths = (async () => {
   const articles = await getArticles();
@@ -65,45 +66,39 @@ if (data.dataset) {
   });
 }
 
-const hasBackMatter = Boolean(data.dataset) || data.sources.length > 0;
 ---
 
 <BaseLayout title={data.title} description={data.description} type="article" jsonLd={jsonLd} noindex={data.draft} image={data.image?.src}>
   <article>
     <header class="article-head">
-      <span class={`pill tone-${TYPE_TONE[data.type]}`}>{TYPE_LABELS[data.type]}</span>
+      <span class={`tag tone-${TYPE_TONE[data.type]}`}>{TYPE_LABELS[data.type]}</span>
       <h1>{data.title}</h1>
-      <div class="byline">
-        <Avatar name={authorName} />
-        <a class="who" href={`/authors/${author?.id}/`}>{authorName}</a>
+      <div class="article-meta">
+        <span class="by"><Avatar name={authorName} /><a href={`/authors/${author?.id}/`}>{authorName}</a></span>
         <time datetime={isoDate(data.pubDate)}>{formatDate(data.pubDate)}</time>
+        <span>{readingTime(article.body)}</span>
         {data.updatedDate && <span>Updated <time datetime={isoDate(data.updatedDate)}>{formatDate(data.updatedDate)}</time></span>}
       </div>
     </header>
 
-    {data.keyFinding && <KeyFinding text={data.keyFinding} />}
-
-    {data.image && (
-      <figure class="lead-image">
-        <img src={data.image.src} alt={data.image.alt} loading="eager" />
+    <figure class="article-cover">
+      <Cover type={data.type} title={data.title} stat={data.cover?.stat} caption={data.cover?.caption} image={data.image} />
+      {data.image && (
         <figcaption>
           {data.image.credit}, {data.image.licence}.
           {data.image.sourceUrl && <> <a href={data.image.sourceUrl} rel="noopener">Source</a></>}
         </figcaption>
-      </figure>
-    )}
+      )}
+    </figure>
+
+    {data.keyFinding && <KeyFinding text={data.keyFinding} tone={TYPE_TONE[data.type]} />}
 
     <div class="article-body">
       <Content />
     </div>
 
-    {hasBackMatter && (
-      <div class="back-matter">
-        {data.dataset && <DatasetBox dataset={data.dataset} />}
-        <Sources sources={data.sources} />
-      </div>
-    )}
-
+    {data.dataset && <DatasetBox dataset={data.dataset} />}
+    <Sources sources={data.sources} />
     <CiteThis title={data.title} author={authorName} pubDate={data.pubDate} path={Astro.url.pathname} />
 
     {data.topics.length > 0 && (

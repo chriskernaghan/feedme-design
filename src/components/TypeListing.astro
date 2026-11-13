@@ -3,11 +3,12 @@ import { getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ArticleCard from './ArticleCard.astro';
 import PageHead from './PageHead.astro';
+import Tabs from './Tabs.astro';
 import MascotFace from './MascotFace.astro';
-import { TYPE_TONE, getArticles } from '../lib/site';
+import { getArticles } from '../lib/site';
 
 interface Props {
-  type: 'breakdown' | 'data' | 'guide';
+  type: 'breakdown' | 'data' | 'guide' | 'insight';
   title: string;
   blurb: string;
   description: string;
@@ -24,9 +25,10 @@ for (const a of articles) {
 ---
 
 <BaseLayout title={title} description={description}>
-  <PageHead title={title} tone={TYPE_TONE[type]} blurb={blurb} />
+  <PageHead title={title} blurb={blurb} />
+  <Tabs active={type} />
   {articles.length > 0 ? (
-    <div class="grid">
+    <div class="posts">
       {articles.map((a) => <ArticleCard article={a} authorName={authorNames.get(a.id)!} />)}
     </div>
   ) : (

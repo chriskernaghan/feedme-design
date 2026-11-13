@@ -5,6 +5,9 @@ pubDate: 2026-11-13
 author: editor-two
 type: data
 topics: [product-page]
+cover:
+  stat: "00%"
+  caption: "of shops did the thing"
 keyFinding: 'The headline number, with its denominator, in one sentence. For example, X of Y shops did Z.'
 dataset:
   name: 'Name of the dataset'

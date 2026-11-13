@@ -26,8 +26,8 @@ const label = topicLabel(topic);
 ---
 
 <BaseLayout title={`${label} UX`} description={`Everything on feedme.design about ${label.toLowerCase()} in e-commerce UX.`}>
-  <PageHead title={label} tone="lilac" blurb={`Everything we've published on ${label.toLowerCase()}.`} />
-  <div class="grid">
+  <PageHead title={label} blurb={`Everything we've published on ${label.toLowerCase()}.`} />
+  <div class="posts">
     {articles.map((a) => <ArticleCard article={a} authorName={authorNames.get(a.id)!} />)}
   </div>
 </BaseLayout>

@@ -1,0 +1,81 @@
+---
+// Cover art generated from the article itself, so every piece gets one without anyone making an image.
+// Data studies lead with their headline number. Everything else leads with its title.
+// If an article has its own image (a screenshot, say), that is used instead.
+import { TYPE_TONE } from '../lib/site';
+
+interface Props {
+  type: 'breakdown' | 'data' | 'guide' | 'insight';
+  title: string;
+  stat?: string;
+  caption?: string;
+  image?: { src: string; alt: string };
+}
+const { type, title, stat, caption, image } = Astro.props;
+const tone = TYPE_TONE[type];
+---
+
+{image ? (
+  <img class="cover cover-img" src={image.src} alt={image.alt} loading="lazy" />
+) : (
+  <div class={`cover tone-${tone}`} aria-hidden="true">
+    <svg class="cover-art" viewBox="0 0 200 140" fill="none">
+      {type === 'data' && (
+        <>
+          <rect x="8" y="80" width="28" height="50" rx="8" fill="#fff" fill-opacity="0.65" />
+          <rect x="46" y="50" width="28" height="80" rx="8" fill="#fff" fill-opacity="0.65" />
+          <rect x="84" y="66" width="28" height="64" rx="8" fill="#fff" fill-opacity="0.65" />
+          <rect x="122" y="18" width="28" height="112" rx="8" fill="#231b6b" />
+          <rect x="160" y="40" width="28" height="90" rx="8" fill="#fff" fill-opacity="0.65" />
+        </>
+      )}
+      {type === 'breakdown' && (
+        <>
+          <rect x="14" y="8" width="160" height="36" rx="10" fill="#fff" fill-opacity="0.65" />
+          <rect x="14" y="54" width="160" height="36" rx="10" fill="#fff" fill-opacity="0.65" />
+          <rect x="14" y="100" width="92" height="30" rx="15" fill="#231b6b" />
+          <circle cx="36" cy="26" r="8" fill="#231b6b" fill-opacity="0.85" />
+          <circle cx="36" cy="72" r="8" fill="#231b6b" fill-opacity="0.85" />
+        </>
+      )}
+      {type === 'insight' && (
+        <>
+          <rect x="10" y="10" width="124" height="58" rx="18" fill="#fff" fill-opacity="0.65" />
+          <path d="M34 66l-6 22 24-16z" fill="#fff" fill-opacity="0.65" />
+          <rect x="28" y="28" width="80" height="10" rx="5" fill="#231b6b" fill-opacity="0.85" />
+          <rect x="28" y="46" width="52" height="10" rx="5" fill="#231b6b" fill-opacity="0.85" />
+          <rect x="94" y="84" width="96" height="46" rx="16" fill="#231b6b" />
+          <path d="M156 128l8 14-22-10z" fill="#231b6b" />
+          <circle cx="116" cy="107" r="5" fill="#fff" />
+          <circle cx="142" cy="107" r="5" fill="#fff" />
+          <circle cx="168" cy="107" r="5" fill="#fff" />
+        </>
+      )}
+      {type === 'guide' && (
+        <>
+          <circle cx="24" cy="28" r="13" fill="#231b6b" />
+          <path d="M18 28l4.5 4.5L31 23" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
+          <rect x="48" y="22" width="120" height="12" rx="6" fill="#fff" fill-opacity="0.65" />
+          <circle cx="24" cy="70" r="13" fill="#231b6b" />
+          <path d="M18 70l4.5 4.5L31 65" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
+          <rect x="48" y="64" width="96" height="12" rx="6" fill="#fff" fill-opacity="0.65" />
+          <circle cx="24" cy="112" r="13" fill="#fff" fill-opacity="0.65" />
+          <rect x="48" y="106" width="108" height="12" rx="6" fill="#fff" fill-opacity="0.65" />
+        </>
+      )}
+    </svg>
+    <div class="cover-body">
+      <span class="cover-brand">feedme.design</span>
+      <div class="cover-main">
+        {stat ? (
+          <>
+            <div class="cover-stat">{stat}</div>
+            {caption && <div class="cover-caption">{caption}</div>}
+          </>
+        ) : (
+          <div class="cover-title">{title}</div>
+        )}
+      </div>
+    </div>
+  </div>
+)}

@@ -12,19 +12,22 @@ export const TYPE_LABELS = {
   breakdown: 'Breakdown',
   data: 'Data study',
   guide: 'Guide',
+  insight: 'Insight',
 } as const;
 
-// Colour carries meaning on this site: raspberry = breakdown, mint = data study, lilac = guide.
+// Colour carries meaning on this site: raspberry = breakdown, mint = data study, lilac = guide, custard = insight.
 export const TYPE_TONE = {
   breakdown: 'berry',
   data: 'mint',
   guide: 'lilac',
+  insight: 'custard',
 } as const;
 
 export const TYPE_PATH = {
   breakdown: '/breakdowns/',
   data: '/data/',
   guide: '/guides/',
+  insight: '/insights/',
 } as const;
 
 export function initials(name: string) {
@@ -65,6 +68,11 @@ export function formatDate(d: Date) {
     year: 'numeric',
     timeZone: 'UTC',
   });
+}
+
+export function readingTime(body: string | undefined) {
+  const words = (body ?? '').split(/\s+/).filter(Boolean).length;
+  return `${Math.max(1, Math.round(words / 220))} min read`;
 }
 
 export function isoDate(d: Date) {

@@ -15,7 +15,11 @@ Astro 7 needs Node 22.23.4 or newer (see `.nvmrc`).
 
 ## Design notes
 
-The look is built around retail signage, because the site is about shops. Colour carries meaning: raspberry marks breakdowns, mint marks data studies, lilac marks guides and custard is the brand colour. On article pages the key finding is a shelf-edge price tag, the dataset block is a nutrition label and the sources are a till receipt. Tokens live at the top of `src/styles/global.css`, fonts are self-hosted through Fontsource (Bagel Fat One for display, Atkinson Hyperlegible Next for text), and the hero mascot is `src/components/Mascot.astro`.
+A light, conventional blog layout with playful touches. Colour carries meaning: raspberry marks breakdowns, mint marks data studies, lilac marks guides and custard is the accent. Every article gets a generated cover (`src/components/Cover.astro`): data studies lead with a headline number set in the `cover` front matter (`stat` and `caption`), other pieces lead with their title, and an article with its own `image` uses that instead. The mascot is the logo only. Tokens live at the top of `src/styles/global.css`; fonts are self-hosted through Fontsource (Bricolage Grotesque for headings, Atkinson Hyperlegible Next for text).
+
+### Previewing drafts
+
+Run `SHOW_DRAFTS=1 npm run build` (or set `SHOW_DRAFTS` to `1` as a build variable on Cloudflare) to include drafts and future-dated posts.
 
 ## Previewing drafts
 

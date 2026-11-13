@@ -1,9 +1,9 @@
 ---
-interface Props { text: string }
-const { text } = Astro.props;
+interface Props { text: string; tone: string }
+const { text, tone } = Astro.props;
 ---
 
-<aside class="shelf-tag" aria-label="Key finding">
+<aside class={`callout tone-${tone}`} aria-label="Key finding">
   <span class="label">Key finding</span>
   <p>{text}</p>
 </aside>

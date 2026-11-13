@@ -1,0 +1,22 @@
+---
+interface Props { active: 'all' | 'breakdown' | 'data' | 'guide' | 'insight' }
+const { active } = Astro.props;
+const tabs = [
+  { key: 'all', href: '/articles/', label: 'All articles', tone: 'custard' },
+  { key: 'breakdown', href: '/breakdowns/', label: 'Breakdowns', tone: 'berry' },
+  { key: 'data', href: '/data/', label: 'Data studies', tone: 'mint' },
+  { key: 'guide', href: '/guides/', label: 'Guides', tone: 'lilac' },
+  { key: 'insight', href: '/insights/', label: 'Insights', tone: 'custard' },
+];
+---
+
+<div class="tabs">
+  <nav aria-label="Filter articles">
+    <ul>
+      {tabs.map((t) => (
+        <li><a class={`tone-${t.tone}`} href={t.href} aria-current={t.key === active ? 'page' : undefined}>{t.label}</a></li>
+      ))}
+    </ul>
+  </nav>
+  <a class="rss" href="/rss.xml">RSS feed</a>
+</div>

@@ -3,6 +3,7 @@ import { getEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
 import PageHead from '../../components/PageHead.astro';
+import Tabs from '../../components/Tabs.astro';
 import MascotFace from '../../components/MascotFace.astro';
 import { getArticles } from '../../lib/site';
 
@@ -14,10 +15,11 @@ for (const a of articles) {
 }
 ---
 
-<BaseLayout title="Articles" description="Every breakdown, data study and guide on feedme.design.">
-  <PageHead title="All articles" tone="custard" blurb="Breakdowns, data studies and guides, newest first." />
+<BaseLayout title="Articles" description="Every breakdown, data study, guide and insight on feedme.design.">
+  <PageHead title="All articles" blurb="Breakdowns, data studies, guides and insights, newest first." />
+  <Tabs active="all" />
   {articles.length > 0 ? (
-    <div class="grid">
+    <div class="posts">
       {articles.map((a) => <ArticleCard article={a} authorName={authorNames.get(a.id)!} />)}
     </div>
   ) : (

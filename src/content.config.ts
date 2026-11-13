@@ -30,8 +30,8 @@ const articles = defineCollection({
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
     author: reference('authors'),
-    // breakdown: teardown of a real flow. data: original numbers. guide: how-to built on the first two.
-    type: z.enum(['breakdown', 'data', 'guide']),
+    // breakdown: teardown of a real flow. data: original numbers. guide: how-to built on the first two. insight: an opinion, reaction or roundup.
+    type: z.enum(['breakdown', 'data', 'guide', 'insight']),
     // Topic slugs, kept small and stable: product-page, checkout, search, navigation, mobile, trust, etc.
     topics: z.array(z.string()).default([]),
     // Optional lead image. Put the file in public/images/ and always record who made it and on what terms.
@@ -43,6 +43,13 @@ const articles = defineCollection({
         // 'own screenshot', 'chart', or the stock licence such as 'Unsplash licence'.
         licence: z.string(),
         sourceUrl: z.string().url().optional(),
+      })
+      .optional(),
+    // Used to generate the cover when there's no image. For data studies, give the headline number and what it counts.
+    cover: z
+      .object({
+        stat: z.string().max(8).optional(),
+        caption: z.string().max(70).optional(),
       })
       .optional(),
     // The headline finding, shown at the top and reused for social cards and citations.

@@ -7,6 +7,7 @@ const links = [
   { href: '/breakdowns/', label: 'Breakdowns', tone: 'berry' },
   { href: '/data/', label: 'Data studies', tone: 'mint' },
   { href: '/guides/', label: 'Guides', tone: 'lilac' },
+  { href: '/insights/', label: 'Insights', tone: 'custard' },
   { href: '/methodology/', label: 'Methodology', tone: 'custard' },
   { href: '/about/', label: 'About', tone: 'custard' },
 ];
@@ -25,6 +26,7 @@ const links = [
             <a class={`tone-${l.tone}`} href={l.href} aria-current={path.startsWith(l.href) ? 'page' : undefined}>{l.label}</a>
           </li>
         ))}
+        <li><a class="btn btn-primary" href="/rss.xml">Subscribe</a></li>
       </ul>
     </nav>
   </div>

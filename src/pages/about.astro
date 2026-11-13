@@ -9,7 +9,7 @@ const authors = (await getCollection('authors')).sort((a, b) => a.data.name.loca
 ---
 
 <BaseLayout title="About" description="Who writes feedme.design and what we cover.">
-  <PageHead title={`About ${SITE.name}`} tone="custard" blurb="An independent publication about how online shops work, and what that costs or earns them." />
+  <PageHead title={`About ${SITE.name}`} blurb="An independent publication about how online shops work, and what that costs or earns them." />
   <div class="prose">
     <p>
       We focus on the parts of the shopping journey where design decisions turn into revenue, such as product pages, search, navigation, checkout and trust signals, and we try to explain them with evidence rather than opinion.
