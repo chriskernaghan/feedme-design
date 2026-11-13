@@ -1,0 +1,17 @@
+---
+interface Props {
+  dataset: { name: string; method: string; sampleSize: string; collected: string; downloadUrl?: string };
+}
+const { dataset } = Astro.props;
+---
+
+<aside class="dataset" aria-labelledby="dataset-heading">
+  <h2 id="dataset-heading">About this data</h2>
+  <dl>
+    <dt>Dataset</dt><dd>{dataset.name}</dd>
+    <dt>Sample</dt><dd>{dataset.sampleSize}</dd>
+    <dt>Collected</dt><dd>{dataset.collected}</dd>
+    <dt>Method</dt><dd>{dataset.method}</dd>
+    {dataset.downloadUrl && <><dt>Download</dt><dd><a href={dataset.downloadUrl}>Raw data (CSV)</a></dd></>}
+  </dl>
+</aside>

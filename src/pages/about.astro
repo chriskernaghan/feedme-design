@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../lib/site';
+
+const authors = (await getCollection('authors')).sort((a, b) => a.data.name.localeCompare(b.data.name));
+---
+
+<BaseLayout title="About" description="Who writes feedme.design and what we cover.">
+  <h1>About {SITE.name}</h1>
+  <div class="prose">
+    <p>
+      {SITE.name} is an independent publication about e-commerce user experience. We focus on the parts of the shopping journey where design decisions turn into revenue, such as product pages, search, navigation, checkout and trust signals, and we try to explain them with evidence rather than opinion.
+    </p>
+    <p>
+      Our writers publish under pseudonyms, which lets each of them write openly about shops and platforms they may also work alongside. What we ask in return is that every piece shows its working, so you can judge the findings without needing to know who produced them. The details are on our <a href="/methodology/">methodology page</a>.
+    </p>
+
+    <h2>The writers</h2>
+    <ul>
+      {authors.map((a) => (
+        <li><a href={`/authors/${a.id}/`}>{a.data.name}</a>, {a.data.role}. <span class="muted">{a.data.short}</span></li>
+      ))}
+    </ul>
+
+    <h2>Get in touch</h2>
+    <p>Corrections, data requests and story tips are all welcome. Add your contact route here before launch.</p>
+  </div>
+</BaseLayout>

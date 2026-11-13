@@ -1,0 +1,19 @@
+name: Daily publish
+
+# Cloudflare Pages rebuilds on every push, but a future-dated article only goes live when a build
+# runs on or after its pubDate. This job triggers that build every morning.
+on:
+  schedule:
+    - cron: '15 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Cloudflare Pages deploy hook
+        env:
+          HOOK: ${{ secrets.CF_PAGES_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then echo "CF_PAGES_DEPLOY_HOOK secret is not set"; exit 1; fi
+          curl --fail --silent --show-error -X POST "$HOOK"

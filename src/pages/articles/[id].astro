@@ -1,0 +1,114 @@
+---
+import { getEntry, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CiteThis from '../../components/CiteThis.astro';
+import Sources from '../../components/Sources.astro';
+import DatasetBox from '../../components/DatasetBox.astro';
+import { SITE, TYPE_LABELS, formatDate, isoDate, topicLabel, getArticles } from '../../lib/site';
+
+export const getStaticPaths = (async () => {
+  const articles = await getArticles();
+  return articles.map((article) => ({ params: { id: article.id }, props: { article } }));
+}) satisfies GetStaticPaths;
+
+const { article } = Astro.props;
+const { data } = article;
+const { Content } = await render(article);
+const author = await getEntry(data.author);
+const authorName = author?.data.name ?? 'Editorial';
+const authorUrl = author ? new URL(`/authors/${author.id}/`, SITE.url).href : SITE.url;
+const pageUrl = new URL(Astro.url.pathname, SITE.url).href;
+
+const jsonLd: Record<string, unknown>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: data.title,
+    description: data.description,
+    datePublished: data.pubDate.toISOString(),
+    dateModified: (data.updatedDate ?? data.pubDate).toISOString(),
+    mainEntityOfPage: pageUrl,
+    author: { '@type': 'Person', name: authorName, url: authorUrl },
+    publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+    keywords: data.topics.map(topicLabel).join(', '),
+    inLanguage: 'en-GB',
+    citation: data.sources.map((s) => s.url),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+      { '@type': 'ListItem', position: 2, name: 'Articles', item: `${SITE.url}/articles/` },
+      { '@type': 'ListItem', position: 3, name: data.title, item: pageUrl },
+    ],
+  },
+];
+
+if (data.dataset) {
+  jsonLd.push({
+    '@context': 'https://schema.org',
+    '@type': 'Dataset',
+    name: data.dataset.name,
+    description: data.description,
+    url: pageUrl,
+    creator: { '@type': 'Person', name: authorName },
+    publisher: { '@type': 'Organization', name: SITE.name },
+    datePublished: data.pubDate.toISOString(),
+    measurementTechnique: data.dataset.method,
+    ...(data.dataset.downloadUrl && {
+      distribution: { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: data.dataset.downloadUrl },
+    }),
+  });
+}
+---
+
+<BaseLayout title={data.title} description={data.description} type="article" jsonLd={jsonLd} noindex={data.draft} image={data.image?.src}>
+  <article>
+    <header class="article-head">
+      <p class="eyebrow"><span class={`pill pill-${data.type}`}>{TYPE_LABELS[data.type]}</span>{data.draft && <span class="pill pill-draft">Draft</span>}</p>
+      <h1>{data.title}</h1>
+      <p class="byline">
+        By <a href={`/authors/${author?.id}/`}>{authorName}</a> ·
+        <time datetime={isoDate(data.pubDate)}>{formatDate(data.pubDate)}</time>
+        {data.updatedDate && <> · Updated <time datetime={isoDate(data.updatedDate)}>{formatDate(data.updatedDate)}</time></>}
+      </p>
+    </header>
+
+    {data.keyFinding && (
+      <p class="key-finding"><span>Key finding</span>{data.keyFinding}</p>
+    )}
+
+    {data.image && (
+      <figure class="lead-image">
+        <img src={data.image.src} alt={data.image.alt} loading="eager" />
+        <figcaption>
+          {data.image.credit}, {data.image.licence}.
+          {data.image.sourceUrl && <> <a href={data.image.sourceUrl} rel="noopener">Source</a></>}
+        </figcaption>
+      </figure>
+    )}
+
+    <div class="article-body">
+      <Content />
+    </div>
+
+    {data.dataset && <DatasetBox dataset={data.dataset} />}
+    <Sources sources={data.sources} />
+    <CiteThis title={data.title} author={authorName} pubDate={data.pubDate} path={Astro.url.pathname} />
+
+    {data.topics.length > 0 && (
+      <ul class="tags" aria-label="Topics">
+        {data.topics.map((t) => <li><a href={`/topics/${t}/`}>{topicLabel(t)}</a></li>)}
+      </ul>
+    )}
+
+    {author && (
+      <aside class="author-box">
+        <p><strong>{authorName}</strong>, {author.data.role}</p>
+        <p class="muted">{author.data.short}</p>
+      </aside>
+    )}
+  </article>
+</BaseLayout>

@@ -1,0 +1,23 @@
+---
+import { SITE } from '../lib/site';
+const path = Astro.url.pathname;
+const links = [
+  { href: '/articles/', label: 'Articles' },
+  { href: '/data/', label: 'Data' },
+  { href: '/methodology/', label: 'Methodology' },
+  { href: '/about/', label: 'About' },
+];
+---
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="wordmark" href="/" aria-label={`${SITE.name} home`}>feedme<span>.design</span></a>
+    <nav aria-label="Main">
+      <ul>
+        {links.map((l) => (
+          <li><a href={l.href} aria-current={path.startsWith(l.href) ? 'page' : undefined}>{l.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>

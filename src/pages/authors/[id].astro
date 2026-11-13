@@ -1,0 +1,55 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { SITE, getArticles } from '../../lib/site';
+
+export const getStaticPaths = (async () => {
+  const authors = await getCollection('authors');
+  const articles = await getArticles();
+  return authors.map((author) => ({
+    params: { id: author.id },
+    props: { author, articles: articles.filter((a) => a.data.author.id === author.id) },
+  }));
+}) satisfies GetStaticPaths;
+
+const { author, articles } = Astro.props;
+const { Content } = await render(author);
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    mainEntity: {
+      '@type': 'Person',
+      name: author.data.name,
+      jobTitle: author.data.role,
+      description: author.data.short,
+      url: new URL(Astro.url.pathname, SITE.url).href,
+      sameAs: author.data.links.map((l) => l.url),
+    },
+  },
+];
+---
+
+<BaseLayout title={author.data.name} description={author.data.short} jsonLd={jsonLd}>
+  <h1>{author.data.name}</h1>
+  <p class="muted">{author.data.role}</p>
+  <div class="prose"><Content /></div>
+
+  {author.data.links.length > 0 && (
+    <ul class="tags">
+      {author.data.links.map((l) => <li><a href={l.url} rel="me noopener">{l.label}</a></li>)}
+    </ul>
+  )}
+
+  <h2>Articles</h2>
+  {articles.length > 0 ? (
+    <div class="grid">
+      {articles.map((a) => <ArticleCard article={a} authorName={author.data.name} />)}
+    </div>
+  ) : (
+    <p class="empty">Nothing published yet.</p>
+  )}
+</BaseLayout>

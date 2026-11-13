@@ -1,0 +1,16 @@
+---
+import { SITE } from '../lib/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p><strong>{SITE.name}</strong> {SITE.tagline}</p>
+    <p class="muted">
+      <a href="/methodology/">How we source and test</a> ·
+      <a href="/rss.xml">RSS</a> ·
+      <a href="/sitemap-index.xml">Sitemap</a>
+    </p>
+    <p class="muted">&copy; {year} {SITE.name}. Data may be cited with attribution.</p>
+  </div>
+</footer>

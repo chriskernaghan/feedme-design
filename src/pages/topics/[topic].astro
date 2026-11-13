@@ -1,0 +1,32 @@
+---
+import { getEntry } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { getArticles, topicLabel } from '../../lib/site';
+
+export const getStaticPaths = (async () => {
+  const articles = await getArticles();
+  const topics = [...new Set(articles.flatMap((a) => a.data.topics))];
+  return topics.map((topic) => ({
+    params: { topic },
+    props: { articles: articles.filter((a) => a.data.topics.includes(topic)) },
+  }));
+}) satisfies GetStaticPaths;
+
+const { topic } = Astro.params;
+const { articles } = Astro.props;
+const authorNames = new Map<string, string>();
+for (const a of articles) {
+  const author = await getEntry(a.data.author);
+  authorNames.set(a.id, author?.data.name ?? 'Editorial');
+}
+const label = topicLabel(topic);
+---
+
+<BaseLayout title={`${label} UX`} description={`Everything on feedme.design about ${label.toLowerCase()} in e-commerce UX.`}>
+  <h1>{label}</h1>
+  <div class="grid">
+    {articles.map((a) => <ArticleCard article={a} authorName={authorNames.get(a.id)!} />)}
+  </div>
+</BaseLayout>

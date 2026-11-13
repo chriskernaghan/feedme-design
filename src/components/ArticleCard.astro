@@ -1,0 +1,22 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { TYPE_LABELS, formatDate, isoDate } from '../lib/site';
+
+interface Props {
+  article: CollectionEntry<'articles'>;
+  authorName: string;
+}
+const { article, authorName } = Astro.props;
+const { data } = article;
+---
+
+<article class="card">
+  <p class="eyebrow"><span class={`pill pill-${data.type}`}>{TYPE_LABELS[data.type]}</span></p>
+  <h3><a href={`/articles/${article.id}/`}>{data.title}</a></h3>
+  {data.keyFinding && <p class="finding">{data.keyFinding}</p>}
+  <p class="muted">{data.description}</p>
+  <p class="meta">
+    {authorName} · <time datetime={isoDate(data.pubDate)}>{formatDate(data.pubDate)}</time>
+    {data.draft && <span class="pill pill-draft">Draft</span>}
+  </p>
+</article>

@@ -1,0 +1,46 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import { SITE, getArticles } from '../lib/site';
+
+const articles = await getArticles();
+const latest = articles.slice(0, 6);
+const authorNames = new Map<string, string>();
+for (const a of latest) {
+  const author = await getEntry(a.data.author);
+  authorNames.set(a.id, author?.data.name ?? 'Editorial');
+}
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE.name,
+    url: SITE.url,
+    description: SITE.description,
+  },
+];
+---
+
+<BaseLayout title={SITE.name} jsonLd={jsonLd}>
+  <section class="hero">
+    <h1>{SITE.tagline}</h1>
+    <p class="lede">
+      We take apart how online shops actually work, then measure what we can. Every claim comes with its method and its sources.
+    </p>
+  </section>
+
+  <div class="section-head">
+    <h2>Latest</h2>
+    <a href="/articles/">All articles</a>
+  </div>
+
+  {latest.length > 0 ? (
+    <div class="grid">
+      {latest.map((a) => <ArticleCard article={a} authorName={authorNames.get(a.id)!} />)}
+    </div>
+  ) : (
+    <p class="empty">First pieces are on their way.</p>
+  )}
+</BaseLayout>
