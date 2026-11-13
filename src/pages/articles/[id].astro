@@ -1,18 +1,21 @@
 ---
 import { getEntry, render } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import CiteThis from '../../components/CiteThis.astro';
-import Sources from '../../components/Sources.astro';
-import DatasetBox from '../../components/DatasetBox.astro';
-import KeyFinding from '../../components/KeyFinding.astro';
-import Avatar from '../../components/Avatar.astro';
-import Cover from '../../components/Cover.astro';
-import { SITE, TYPE_LABELS, TYPE_TONE, formatDate, isoDate, topicLabel, getArticles, readingTime } from '../../lib/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CiteThis from '../components/CiteThis.astro';
+import Sources from '../components/Sources.astro';
+import DatasetBox from '../components/DatasetBox.astro';
+import KeyFinding from '../components/KeyFinding.astro';
+import Avatar from '../components/Avatar.astro';
+import Cover from '../components/Cover.astro';
+import { SITE, TYPE_LABELS, TYPE_TONE, formatDate, isoDate, topicLabel, getArticles, readingTime, articleUrl } from '../lib/site';
 
 export const getStaticPaths = (async () => {
   const articles = await getArticles();
-  return articles.map((article) => ({ params: { id: article.id }, props: { article } }));
+  return articles.map((article) => ({
+    params: { slug: articleUrl(article).replace(/^\/|\/$/g, '') },
+    props: { article },
+  }));
 }) satisfies GetStaticPaths;
 
 const { article } = Astro.props;

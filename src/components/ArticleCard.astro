@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { TYPE_LABELS, TYPE_TONE, formatDate, isoDate } from '../lib/site';
+import { TYPE_LABELS, TYPE_TONE, articleUrl, formatDate, isoDate } from '../lib/site';
 import Avatar from './Avatar.astro';
 import Cover from './Cover.astro';
 
@@ -11,7 +11,7 @@ interface Props {
 }
 const { article, authorName, feature = false } = Astro.props;
 const { data } = article;
-const href = `/articles/${article.id}/`;
+const href = articleUrl(article);
 const tone = TYPE_TONE[data.type];
 ---
 

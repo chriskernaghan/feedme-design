@@ -1,6 +1,6 @@
 import rss from '@astrojs/rss';
 import type { APIContext } from 'astro';
-import { SITE, getArticles } from '../lib/site';
+import { SITE, articleUrl, getArticles } from '../lib/site';
 
 export async function GET(context: APIContext) {
   const articles = await getArticles();
@@ -12,9 +12,9 @@ export async function GET(context: APIContext) {
       title: a.data.title,
       description: a.data.description,
       pubDate: a.data.pubDate,
-      link: `/articles/${a.id}/`,
+      link: articleUrl(a),
       categories: a.data.topics,
     })),
-    customData: '<language>en-gb</language>',
+    customData: '<language>en-GB</language>',
   });
 }

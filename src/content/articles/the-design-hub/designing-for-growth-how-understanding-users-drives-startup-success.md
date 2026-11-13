@@ -16,6 +16,7 @@ sources:
     url: "https://www.gov.uk/service-manual/user-research/find-user-research-participants"
     accessed: 2026-11-13
 draft: true
+path: /the-design-hub/designing-for-growth-how-understanding-users-drives-startup-success
 ---
 
 > **Archive note:** This is a newly researched replacement for an unavailable Feed Me Design article. It was prepared on 13 November 2026 and is not a recovered copy of the original.

@@ -32,6 +32,8 @@ const articles = defineCollection({
     author: reference('authors'),
     // breakdown: teardown of a real flow. data: original numbers. guide: how-to built on the first two. insight: an opinion, reaction or roundup.
     type: z.enum(['breakdown', 'data', 'guide', 'insight']),
+    // Optional. Publish at an exact address instead of /articles/<filename>/, e.g. '/the-design-hub/my-post'. Use for recreated articles whose old URL must stay the same.
+    path: z.string().startsWith('/').optional(),
     // Topic slugs, kept small and stable: product-page, checkout, search, navigation, mobile, trust, etc.
     topics: z.array(z.string()).default([]),
     // Optional lead image. Put the file in public/images/ and always record who made it and on what terms.

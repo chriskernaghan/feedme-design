@@ -70,6 +70,12 @@ export function formatDate(d: Date) {
   });
 }
 
+// Where an article lives. A `path` in the front matter wins, otherwise /articles/<filename>/.
+export function articleUrl(article: { id: string; data: { path?: string } }) {
+  const custom = article.data.path?.replace(/^\/+|\/+$/g, '');
+  return custom ? `/${custom}/` : `/articles/${article.id}/`;
+}
+
 export function readingTime(body: string | undefined) {
   const words = (body ?? '').split(/\s+/).filter(Boolean).length;
   return `${Math.max(1, Math.round(words / 220))} min read`;
