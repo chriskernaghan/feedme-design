@@ -1,22 +1,30 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { TYPE_LABELS, formatDate, isoDate } from '../lib/site';
+import { TYPE_LABELS, TYPE_TONE, formatDate, isoDate } from '../lib/site';
+import Avatar from './Avatar.astro';
 
 interface Props {
   article: CollectionEntry<'articles'>;
   authorName: string;
+  feature?: boolean;
 }
-const { article, authorName } = Astro.props;
+const { article, authorName, feature = false } = Astro.props;
 const { data } = article;
 ---
 
-<article class="card">
-  <p class="eyebrow"><span class={`pill pill-${data.type}`}>{TYPE_LABELS[data.type]}</span></p>
-  <h3><a href={`/articles/${article.id}/`}>{data.title}</a></h3>
-  {data.keyFinding && <p class="finding">{data.keyFinding}</p>}
-  <p class="muted">{data.description}</p>
-  <p class="meta">
-    {authorName} · <time datetime={isoDate(data.pubDate)}>{formatDate(data.pubDate)}</time>
-    {data.draft && <span class="pill pill-draft">Draft</span>}
-  </p>
+<article class={`card tone-${TYPE_TONE[data.type]}${feature ? ' card-feature' : ''}`}>
+  <div class="card-tag">
+    <span>{TYPE_LABELS[data.type]}</span>
+    {data.draft && <span class="draft-flag">Draft</span>}
+  </div>
+  <div class="card-body">
+    <h3><a href={`/articles/${article.id}/`}>{data.title}</a></h3>
+    {data.keyFinding && <p class="finding">{data.keyFinding}</p>}
+    <p class="desc">{data.description}</p>
+    <div class="card-foot">
+      <Avatar name={authorName} />
+      <span class="who">{authorName}</span>
+      <time datetime={isoDate(data.pubDate)}>{formatDate(data.pubDate)}</time>
+    </div>
+  </div>
 </article>

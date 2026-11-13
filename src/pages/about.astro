@@ -1,25 +1,30 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHead from '../components/PageHead.astro';
+import Avatar from '../components/Avatar.astro';
 import { SITE } from '../lib/site';
 
 const authors = (await getCollection('authors')).sort((a, b) => a.data.name.localeCompare(b.data.name));
 ---
 
 <BaseLayout title="About" description="Who writes feedme.design and what we cover.">
-  <h1>About {SITE.name}</h1>
+  <PageHead title={`About ${SITE.name}`} tone="custard" blurb="An independent publication about how online shops work, and what that costs or earns them." />
   <div class="prose">
     <p>
-      {SITE.name} is an independent publication about e-commerce user experience. We focus on the parts of the shopping journey where design decisions turn into revenue, such as product pages, search, navigation, checkout and trust signals, and we try to explain them with evidence rather than opinion.
+      We focus on the parts of the shopping journey where design decisions turn into revenue, such as product pages, search, navigation, checkout and trust signals, and we try to explain them with evidence rather than opinion.
     </p>
     <p>
       Our writers publish under pseudonyms, which lets each of them write openly about shops and platforms they may also work alongside. What we ask in return is that every piece shows its working, so you can judge the findings without needing to know who produced them. The details are on our <a href="/methodology/">methodology page</a>.
     </p>
 
     <h2>The writers</h2>
-    <ul>
+    <ul class="footer-list" style="list-style: none; padding: 0; display: grid; gap: 1rem;">
       {authors.map((a) => (
-        <li><a href={`/authors/${a.id}/`}>{a.data.name}</a>, {a.data.role}. <span class="muted">{a.data.short}</span></li>
+        <li style="display: flex; gap: 0.9rem; align-items: flex-start;">
+          <Avatar name={a.data.name} />
+          <span><a href={`/authors/${a.id}/`}><strong>{a.data.name}</strong></a>, {a.data.role}. <span class="muted">{a.data.short}</span></span>
+        </li>
       ))}
     </ul>
 

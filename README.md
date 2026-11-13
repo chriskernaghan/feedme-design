@@ -13,6 +13,14 @@ SHOW_DRAFTS=1 npm run build   # include drafts, for a preview build
 
 Astro 7 needs Node 22.23.4 or newer (see `.nvmrc`).
 
+## Design notes
+
+The look is built around retail signage, because the site is about shops. Colour carries meaning: raspberry marks breakdowns, mint marks data studies, lilac marks guides and custard is the brand colour. On article pages the key finding is a shelf-edge price tag, the dataset block is a nutrition label and the sources are a till receipt. Tokens live at the top of `src/styles/global.css`, fonts are self-hosted through Fontsource (Bagel Fat One for display, Atkinson Hyperlegible Next for text), and the hero mascot is `src/components/Mascot.astro`.
+
+## Previewing drafts
+
+Drafts and future-dated pieces are hidden from production builds. To see the sample content on a preview deployment, add a build variable `SHOW_DRAFTS` set to `1` in Cloudflare, and remove it before launch.
+
 ## Adding content
 
 **A writer:** add `src/content/authors/<slug>.md`. The `name` is the pseudonym shown on the site, and the page lives at `/authors/<slug>/`. The two included authors are placeholders.

@@ -1,17 +1,18 @@
 ---
+// The dataset block, set out like the nutrition label on the back of a packet.
 interface Props {
   dataset: { name: string; method: string; sampleSize: string; collected: string; downloadUrl?: string };
 }
 const { dataset } = Astro.props;
 ---
 
-<aside class="dataset" aria-labelledby="dataset-heading">
+<aside class="nutrition" aria-labelledby="dataset-heading">
   <h2 id="dataset-heading">About this data</h2>
   <dl>
-    <dt>Dataset</dt><dd>{dataset.name}</dd>
-    <dt>Sample</dt><dd>{dataset.sampleSize}</dd>
-    <dt>Collected</dt><dd>{dataset.collected}</dd>
-    <dt>Method</dt><dd>{dataset.method}</dd>
-    {dataset.downloadUrl && <><dt>Download</dt><dd><a href={dataset.downloadUrl}>Raw data (CSV)</a></dd></>}
+    <div class="row heavy"><dt>Dataset</dt><dd>{dataset.name}</dd></div>
+    <div class="row big"><dt>Sample</dt><dd>{dataset.sampleSize}</dd></div>
+    <div class="row big"><dt>Collected</dt><dd>{dataset.collected}</dd></div>
+    <div class="row"><dt>Method</dt><dd>{dataset.method}</dd></div>
+    {dataset.downloadUrl && <div class="row"><dt>Download</dt><dd><a href={dataset.downloadUrl}>Raw data (CSV)</a></dd></div>}
   </dl>
 </aside>

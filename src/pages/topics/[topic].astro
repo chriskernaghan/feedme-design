@@ -3,6 +3,7 @@ import { getEntry } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
+import PageHead from '../../components/PageHead.astro';
 import { getArticles, topicLabel } from '../../lib/site';
 
 export const getStaticPaths = (async () => {
@@ -25,7 +26,7 @@ const label = topicLabel(topic);
 ---
 
 <BaseLayout title={`${label} UX`} description={`Everything on feedme.design about ${label.toLowerCase()} in e-commerce UX.`}>
-  <h1>{label}</h1>
+  <PageHead title={label} tone="lilac" blurb={`Everything we've published on ${label.toLowerCase()}.`} />
   <div class="grid">
     {articles.map((a) => <ArticleCard article={a} authorName={authorNames.get(a.id)!} />)}
   </div>

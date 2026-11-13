@@ -2,6 +2,8 @@
 import { getEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
+import PageHead from '../../components/PageHead.astro';
+import MascotFace from '../../components/MascotFace.astro';
 import { getArticles } from '../../lib/site';
 
 const articles = await getArticles();
@@ -13,12 +15,15 @@ for (const a of articles) {
 ---
 
 <BaseLayout title="Articles" description="Every breakdown, data study and guide on feedme.design.">
-  <h1>Articles</h1>
+  <PageHead title="All articles" tone="custard" blurb="Breakdowns, data studies and guides, newest first." />
   {articles.length > 0 ? (
     <div class="grid">
       {articles.map((a) => <ArticleCard article={a} authorName={authorNames.get(a.id)!} />)}
     </div>
   ) : (
-    <p class="empty">Nothing published yet.</p>
+    <div class="empty">
+      <MascotFace />
+      <p>Nothing published yet. The first pieces land soon.</p>
+    </div>
   )}
 </BaseLayout>

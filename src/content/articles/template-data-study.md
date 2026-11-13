@@ -11,7 +11,11 @@ dataset:
   method: 'How shops were chosen and how each was assessed.'
   sampleSize: 'N shops, N pages'
   collected: 'Month and year of collection'
-sources: []
+sources:
+  - title: 'Example source title'
+    publisher: 'Publisher name'
+    url: 'https://example.com/'
+    accessed: 2026-11-13
 draft: true
 ---
 

@@ -1,8 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import MascotFace from '../components/MascotFace.astro';
 ---
 
 <BaseLayout title="Page not found" noindex>
-  <h1>That page isn't here</h1>
-  <p class="prose">It may have moved, or it may never have existed. Try the <a href="/articles/">articles</a> or head back <a href="/">home</a>.</p>
+  <div class="empty" style="margin-top: 2rem">
+    <MascotFace />
+    <div>
+      <h1 style="font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 0.3em">That page isn't here</h1>
+      <p>It may have moved, or it may never have existed. Try the <a href="/articles/">articles</a> or go back <a href="/">home</a>.</p>
+    </div>
+  </div>
 </BaseLayout>

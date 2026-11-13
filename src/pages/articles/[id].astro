@@ -5,7 +5,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import CiteThis from '../../components/CiteThis.astro';
 import Sources from '../../components/Sources.astro';
 import DatasetBox from '../../components/DatasetBox.astro';
-import { SITE, TYPE_LABELS, formatDate, isoDate, topicLabel, getArticles } from '../../lib/site';
+import KeyFinding from '../../components/KeyFinding.astro';
+import Avatar from '../../components/Avatar.astro';
+import { SITE, TYPE_LABELS, TYPE_TONE, formatDate, isoDate, topicLabel, getArticles } from '../../lib/site';
 
 export const getStaticPaths = (async () => {
   const articles = await getArticles();
@@ -62,23 +64,24 @@ if (data.dataset) {
     }),
   });
 }
+
+const hasBackMatter = Boolean(data.dataset) || data.sources.length > 0;
 ---
 
 <BaseLayout title={data.title} description={data.description} type="article" jsonLd={jsonLd} noindex={data.draft} image={data.image?.src}>
   <article>
     <header class="article-head">
-      <p class="eyebrow"><span class={`pill pill-${data.type}`}>{TYPE_LABELS[data.type]}</span>{data.draft && <span class="pill pill-draft">Draft</span>}</p>
+      <span class={`pill tone-${TYPE_TONE[data.type]}`}>{TYPE_LABELS[data.type]}</span>
       <h1>{data.title}</h1>
-      <p class="byline">
-        By <a href={`/authors/${author?.id}/`}>{authorName}</a> ·
+      <div class="byline">
+        <Avatar name={authorName} />
+        <a class="who" href={`/authors/${author?.id}/`}>{authorName}</a>
         <time datetime={isoDate(data.pubDate)}>{formatDate(data.pubDate)}</time>
-        {data.updatedDate && <> · Updated <time datetime={isoDate(data.updatedDate)}>{formatDate(data.updatedDate)}</time></>}
-      </p>
+        {data.updatedDate && <span>Updated <time datetime={isoDate(data.updatedDate)}>{formatDate(data.updatedDate)}</time></span>}
+      </div>
     </header>
 
-    {data.keyFinding && (
-      <p class="key-finding"><span>Key finding</span>{data.keyFinding}</p>
-    )}
+    {data.keyFinding && <KeyFinding text={data.keyFinding} />}
 
     {data.image && (
       <figure class="lead-image">
@@ -94,8 +97,13 @@ if (data.dataset) {
       <Content />
     </div>
 
-    {data.dataset && <DatasetBox dataset={data.dataset} />}
-    <Sources sources={data.sources} />
+    {hasBackMatter && (
+      <div class="back-matter">
+        {data.dataset && <DatasetBox dataset={data.dataset} />}
+        <Sources sources={data.sources} />
+      </div>
+    )}
+
     <CiteThis title={data.title} author={authorName} pubDate={data.pubDate} path={Astro.url.pathname} />
 
     {data.topics.length > 0 && (
@@ -106,8 +114,11 @@ if (data.dataset) {
 
     {author && (
       <aside class="author-box">
-        <p><strong>{authorName}</strong>, {author.data.role}</p>
-        <p class="muted">{author.data.short}</p>
+        <Avatar name={authorName} large />
+        <div>
+          <p class="name"><a href={`/authors/${author.id}/`}>{authorName}</a>, {author.data.role}</p>
+          <p class="muted">{author.data.short}</p>
+        </div>
       </aside>
     )}
   </article>

@@ -1,30 +1,11 @@
 ---
-import { getEntry } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import ArticleCard from '../../components/ArticleCard.astro';
-import { getArticles } from '../../lib/site';
-
-const articles = (await getArticles()).filter((a) => a.data.type === 'data');
-const authorNames = new Map<string, string>();
-for (const a of articles) {
-  const author = await getEntry(a.data.author);
-  authorNames.set(a.id, author?.data.name ?? 'Editorial');
-}
+import TypeListing from '../../components/TypeListing.astro';
 ---
 
-<BaseLayout
+<TypeListing
+  type="data"
   title="Data studies"
+  blurb="Original measurements of real shops. Each one states its sample, its method and the date we ran it."
   description="Original e-commerce UX data studies, with sample sizes, methods and downloadable figures."
->
-  <h1>Data studies</h1>
-  <p class="muted prose">
-    Original numbers, collected by us. Each study states its sample, its method and when it was run, so you can cite it with confidence.
-  </p>
-  {articles.length > 0 ? (
-    <div class="grid">
-      {articles.map((a) => <ArticleCard article={a} authorName={authorNames.get(a.id)!} />)}
-    </div>
-  ) : (
-    <p class="empty">The first study is in progress.</p>
-  )}
-</BaseLayout>
+  empty="The first study is still being measured."
+/>

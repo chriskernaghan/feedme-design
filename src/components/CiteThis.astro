@@ -13,8 +13,35 @@ const year = pubDate.getUTCFullYear();
 const plain = `${author} (${year}). ${title}. ${SITE.name}. ${formatDate(pubDate)}. ${url}`;
 ---
 
-<aside class="cite" aria-labelledby="cite-heading">
+<aside class="cite" aria-labelledby="cite-heading" data-cite>
   <h2 id="cite-heading">Cite this</h2>
-  <p class="cite-text">{plain}</p>
-  <p class="muted small">Quote the figures freely, with a link back to this page.</p>
+  <p class="cite-text" data-cite-text>{plain}</p>
+  <button class="btn" type="button" data-cite-button>Copy citation</button>
+  <span class="sr-only" role="status" data-cite-status></span>
+  <p class="note">Quote the figures freely, with a link back to this page.</p>
 </aside>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-cite]').forEach((box) => {
+    const button = box.querySelector<HTMLButtonElement>('[data-cite-button]');
+    const text = box.querySelector<HTMLElement>('[data-cite-text]');
+    const status = box.querySelector<HTMLElement>('[data-cite-status]');
+    if (!button || !text) return;
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(text.textContent ?? '');
+        button.textContent = 'Copied';
+        if (status) status.textContent = 'Citation copied to clipboard';
+      } catch {
+        // Clipboard can be blocked. Select the text so the person can copy it by hand.
+        const range = document.createRange();
+        range.selectNodeContents(text);
+        const sel = window.getSelection();
+        sel?.removeAllRanges();
+        sel?.addRange(range);
+        button.textContent = 'Press Ctrl+C to copy';
+      }
+      setTimeout(() => { button.textContent = 'Copy citation'; }, 2200);
+    });
+  });
+</script>

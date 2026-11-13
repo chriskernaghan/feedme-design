@@ -1,5 +1,6 @@
 ---
-import { formatDate, isoDate } from '../lib/site';
+// Sources, set out like a till receipt. Each source is a line item with the date we last checked it.
+import { SITE, formatDate, isoDate } from '../lib/site';
 
 interface Props {
   sources: { title: string; publisher: string; url: string; accessed: Date }[];
@@ -8,15 +9,24 @@ const { sources } = Astro.props;
 ---
 
 {sources.length > 0 && (
-  <section class="sources" aria-labelledby="sources-heading">
-    <h2 id="sources-heading">Sources</h2>
-    <ol>
-      {sources.map((s) => (
-        <li>
-          <a href={s.url} rel="noopener">{s.title}</a>, {s.publisher}.
-          <span class="muted"> Accessed <time datetime={isoDate(s.accessed)}>{formatDate(s.accessed)}</time>.</span>
-        </li>
-      ))}
-    </ol>
-  </section>
+  <div class="receipt-wrap">
+    <section class="receipt" aria-labelledby="sources-heading">
+      <h2 id="sources-heading">Sources</h2>
+      <p class="shop">{SITE.name}</p>
+      <hr />
+      <ol>
+        {sources.map((s) => (
+          <li>
+            <span>
+              <a href={s.url} rel="noopener">{s.title}</a>
+              <span class="meta">{s.publisher}</span>
+              <span class="meta">Checked <time datetime={isoDate(s.accessed)}>{formatDate(s.accessed)}</time></span>
+            </span>
+          </li>
+        ))}
+      </ol>
+      <hr />
+      <p class="total">{sources.length} {sources.length === 1 ? 'source' : 'sources'} checked</p>
+    </section>
+  </div>
 )}

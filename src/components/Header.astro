@@ -1,21 +1,29 @@
 ---
 import { SITE } from '../lib/site';
+import MascotFace from './MascotFace.astro';
+
 const path = Astro.url.pathname;
 const links = [
-  { href: '/articles/', label: 'Articles' },
-  { href: '/data/', label: 'Data' },
-  { href: '/methodology/', label: 'Methodology' },
-  { href: '/about/', label: 'About' },
+  { href: '/breakdowns/', label: 'Breakdowns', tone: 'berry' },
+  { href: '/data/', label: 'Data studies', tone: 'mint' },
+  { href: '/guides/', label: 'Guides', tone: 'lilac' },
+  { href: '/methodology/', label: 'Methodology', tone: 'custard' },
+  { href: '/about/', label: 'About', tone: 'custard' },
 ];
 ---
 
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="wordmark" href="/" aria-label={`${SITE.name} home`}>feedme<span>.design</span></a>
+    <a class="wordmark" href="/" aria-label={`${SITE.name} home`}>
+      <MascotFace />
+      <span>feedme<span class="tld">.design</span></span>
+    </a>
     <nav aria-label="Main">
       <ul>
         {links.map((l) => (
-          <li><a href={l.href} aria-current={path.startsWith(l.href) ? 'page' : undefined}>{l.label}</a></li>
+          <li>
+            <a class={`tone-${l.tone}`} href={l.href} aria-current={path.startsWith(l.href) ? 'page' : undefined}>{l.label}</a>
+          </li>
         ))}
       </ul>
     </nav>

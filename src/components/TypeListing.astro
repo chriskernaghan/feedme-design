@@ -1,0 +1,38 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleCard from './ArticleCard.astro';
+import PageHead from './PageHead.astro';
+import MascotFace from './MascotFace.astro';
+import { TYPE_TONE, getArticles } from '../lib/site';
+
+interface Props {
+  type: 'breakdown' | 'data' | 'guide';
+  title: string;
+  blurb: string;
+  description: string;
+  empty: string;
+}
+const { type, title, blurb, description, empty } = Astro.props;
+
+const articles = (await getArticles()).filter((a) => a.data.type === type);
+const authorNames = new Map<string, string>();
+for (const a of articles) {
+  const author = await getEntry(a.data.author);
+  authorNames.set(a.id, author?.data.name ?? 'Editorial');
+}
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHead title={title} tone={TYPE_TONE[type]} blurb={blurb} />
+  {articles.length > 0 ? (
+    <div class="grid">
+      {articles.map((a) => <ArticleCard article={a} authorName={authorNames.get(a.id)!} />)}
+    </div>
+  ) : (
+    <div class="empty">
+      <MascotFace />
+      <p>{empty}</p>
+    </div>
+  )}
+</BaseLayout>

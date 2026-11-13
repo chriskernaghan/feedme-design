@@ -1,0 +1,58 @@
+---
+// Hero mascot. It eats a buy button, a star rating and a search lens once on page load.
+// With reduced motion it stays in its resting pose, items still hovering above its head.
+---
+
+<svg class="mascot" viewBox="0 0 400 380" role="img" aria-label="A pink creature with an enormous open mouth, about to eat a buy button, a star and a magnifying glass">
+  <defs>
+    <clipPath id="mouth-clip">
+      <path d="M105 225 Q200 372 295 225 Q200 205 105 225 Z" />
+    </clipPath>
+  </defs>
+
+  <!-- feet -->
+  <ellipse cx="140" cy="350" rx="34" ry="15" fill="#ff4f8b" stroke="#231b6b" stroke-width="7" />
+  <ellipse cx="260" cy="350" rx="34" ry="15" fill="#ff4f8b" stroke="#231b6b" stroke-width="7" />
+
+  <!-- tuft -->
+  <path d="M200 96 Q192 60 170 48" fill="none" stroke="#231b6b" stroke-width="9" stroke-linecap="round" />
+  <path d="M204 96 Q214 56 242 52" fill="none" stroke="#231b6b" stroke-width="9" stroke-linecap="round" />
+
+  <!-- body -->
+  <rect x="48" y="92" width="304" height="256" rx="126" fill="#ff4f8b" stroke="#231b6b" stroke-width="8" />
+
+  <!-- eyes -->
+  <circle cx="142" cy="164" r="31" fill="#fff" stroke="#231b6b" stroke-width="7" />
+  <circle cx="258" cy="164" r="31" fill="#fff" stroke="#231b6b" stroke-width="7" />
+  <circle cx="150" cy="171" r="12" fill="#231b6b" />
+  <circle cx="250" cy="171" r="12" fill="#231b6b" />
+
+  <!-- mouth -->
+  <g class="jaw">
+    <path d="M105 225 Q200 372 295 225 Q200 205 105 225 Z" fill="#231b6b" stroke="#231b6b" stroke-width="8" stroke-linejoin="round" />
+    <g clip-path="url(#mouth-clip)">
+      <ellipse cx="200" cy="300" rx="62" ry="38" fill="#ff9dbf" />
+    </g>
+    <rect x="158" y="219" width="28" height="24" rx="5" fill="#fff" />
+    <rect x="214" y="219" width="28" height="24" rx="5" fill="#fff" />
+  </g>
+
+  <!-- things to eat -->
+  <g transform="translate(62 66)">
+    <g class="item" style="--dx: 138px; --dy: 172px; --rot: 20deg; --delay: 0.7s">
+      <rect x="-37" y="-17" width="74" height="34" rx="17" fill="#35e0a1" stroke="#231b6b" stroke-width="5" />
+      <text x="0" y="6" text-anchor="middle" font-size="17" fill="#231b6b" style="font-family: var(--display)">Buy</text>
+    </g>
+  </g>
+  <g transform="translate(200 40)">
+    <g class="item" style="--dx: 0px; --dy: 196px; --rot: -25deg; --delay: 1.6s">
+      <polygon points="0,-28 7,-9.6 26.6,-8.6 11.3,3.7 16.4,22.6 0,11.8 -16.4,22.6 -11.3,3.7 -26.6,-8.6 -7,-9.6" fill="#ffd84d" stroke="#231b6b" stroke-width="5" stroke-linejoin="round" />
+    </g>
+  </g>
+  <g transform="translate(338 66)">
+    <g class="item" style="--dx: -138px; --dy: 172px; --rot: -30deg; --delay: 2.5s">
+      <circle cx="-4" cy="-4" r="17" fill="#c3b5ff" stroke="#231b6b" stroke-width="5" />
+      <line x1="9" y1="9" x2="27" y2="27" stroke="#231b6b" stroke-width="9" stroke-linecap="round" />
+    </g>
+  </g>
+</svg>

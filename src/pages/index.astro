@@ -2,15 +2,26 @@
 import { getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
-import { SITE, getArticles } from '../lib/site';
+import Mascot from '../components/Mascot.astro';
+import MascotFace from '../components/MascotFace.astro';
+import { SITE, TYPE_PATH, getArticles } from '../lib/site';
 
 const articles = await getArticles();
-const latest = articles.slice(0, 6);
+const latest = articles.slice(0, 7);
 const authorNames = new Map<string, string>();
 for (const a of latest) {
   const author = await getEntry(a.data.author);
   authorNames.set(a.id, author?.data.name ?? 'Editorial');
 }
+
+const count = (type: 'breakdown' | 'data' | 'guide') => articles.filter((a) => a.data.type === type).length;
+const plural = (n: number) => (n === 1 ? '1 piece' : `${n} pieces`);
+
+const menu = [
+  { type: 'breakdown' as const, tone: 'berry', title: 'Breakdowns', blurb: 'One real shop flow, taken apart step by step.' },
+  { type: 'data' as const, tone: 'mint', title: 'Data studies', blurb: 'Original measurements on a fixed panel of UK shops.' },
+  { type: 'guide' as const, tone: 'lilac', title: 'Guides', blurb: "How-tos that only use what we've measured." },
+];
 
 const jsonLd = [
   {
@@ -24,12 +35,30 @@ const jsonLd = [
 ---
 
 <BaseLayout title={SITE.name} jsonLd={jsonLd}>
-  <section class="hero">
-    <h1>{SITE.tagline}</h1>
-    <p class="lede">
-      We take apart how online shops actually work, then measure what we can. Every claim comes with its method and its sources.
-    </p>
+  <section class="hero" aria-labelledby="hero-heading" style="margin-inline: calc(50% - 50vw); padding-inline: calc(50vw - 50%);">
+    <div class="hero-grid">
+      <div>
+        <h1 id="hero-heading">E-commerce UX, picked apart.</h1>
+        <p class="lede">We take real shops apart, measure what we can, and show our working so you can cite it.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/articles/">Read the latest</a>
+          <a class="btn" href="/methodology/">How we measure</a>
+        </div>
+      </div>
+      <Mascot />
+    </div>
   </section>
+
+  <h2 class="sr-only">Browse by type</h2>
+  <div class="menu">
+    {menu.map((m) => (
+      <a class={`tile tone-${m.tone}`} href={TYPE_PATH[m.type]}>
+        <h3>{m.title}</h3>
+        <p>{m.blurb}</p>
+        <span class="count">{count(m.type) > 0 ? plural(count(m.type)) : 'Coming soon'}</span>
+      </a>
+    ))}
+  </div>
 
   <div class="section-head">
     <h2>Latest</h2>
@@ -38,9 +67,22 @@ const jsonLd = [
 
   {latest.length > 0 ? (
     <div class="grid">
-      {latest.map((a) => <ArticleCard article={a} authorName={authorNames.get(a.id)!} />)}
+      {latest.map((a, i) => <ArticleCard article={a} authorName={authorNames.get(a.id)!} feature={i === 0} />)}
     </div>
   ) : (
-    <p class="empty">First pieces are on their way.</p>
+    <div class="empty">
+      <MascotFace />
+      <p>Nothing published yet. The first pieces land soon.</p>
+    </div>
   )}
+
+  <section class="working" aria-labelledby="working-heading" style="margin-inline: calc(50% - 50vw); padding-inline: calc(50vw - 50%);">
+    <h2 id="working-heading">We show our working</h2>
+    <div class="working-grid">
+      <p><strong>We state the sample.</strong>Every study says how many shops, which shops and when we measured them.</p>
+      <p><strong>We date the screenshots.</strong>Shops change their designs constantly, so each image carries the day we took it.</p>
+      <p><strong>We link the sources.</strong>Third-party figures point to the original publisher, with the date we last checked.</p>
+    </div>
+    <p style="margin-top: 1.5rem"><a href="/methodology/">Read the full method</a></p>
+  </section>
 </BaseLayout>

@@ -1,0 +1,7 @@
+---
+import { initials, avatarTone } from '../lib/site';
+interface Props { name: string; large?: boolean }
+const { name, large = false } = Astro.props;
+---
+
+<span class={`avatar tone-${avatarTone(name)}${large ? ' avatar-lg' : ''}`} aria-hidden="true">{initials(name)}</span>

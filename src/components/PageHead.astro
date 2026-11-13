@@ -1,0 +1,9 @@
+---
+interface Props { title: string; tone: 'berry' | 'mint' | 'lilac' | 'custard'; blurb?: string }
+const { title, tone, blurb } = Astro.props;
+---
+
+<header class={`page-head tone-${tone}`}>
+  <h1>{title}</h1>
+  {blurb && <p>{blurb}</p>}
+</header>
