@@ -71,7 +71,7 @@ if (data.dataset) {
 
 ---
 
-<BaseLayout title={data.title} description={data.description} type="article" jsonLd={jsonLd} noindex={data.draft} image={data.image?.src}>
+<BaseLayout title={data.title} description={data.description} type="article" jsonLd={jsonLd} noindex={data.draft} image={data.image?.src ?? `/og/${article.id}.png`}>
   <article>
     <header class="article-head">
       <span class={`tag tone-${TYPE_TONE[data.type]}`}>{TYPE_LABELS[data.type]}</span>
