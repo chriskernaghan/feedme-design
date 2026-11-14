@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="770" viewBox="0 0 1280 770" role="img" aria-labelledby="title desc">
+<title id="title">A clearer delivery estimate: proposed basket summary</title>
+<desc id="desc">Two concept states. Before an estimate: items £12.95, delivery not yet calculated, estimate delivery link. After a quote: items £12.95, estimated delivery £3.95, estimated total £16.90. Not MUJI screenshots.</desc>
+<rect width="1280" height="770" fill="#101027"/>
+<g font-family="Arial, sans-serif">
+<text x="56" y="60" fill="#ff4692" font-size="19" font-weight="700">feedme.design / DESIGN PROPOSAL</text>
+<text x="56" y="112" fill="#f5f2ff" font-size="36" font-weight="700">Make the delivery estimate easier to find</text>
+<text x="56" y="151" fill="#bab7d8" font-size="20">Concept only · Not MUJI’s interface · Not user-tested · 14 November 2026</text>
+<rect x="56" y="192" width="552" height="455" rx="20" fill="#f7f5fc"/>
+<rect x="640" y="192" width="584" height="455" rx="20" fill="#f7f5fc"/>
+<text x="86" y="235" fill="#6a627b" font-size="16" font-weight="700">BEFORE AN ESTIMATE</text>
+<text x="670" y="235" fill="#6a627b" font-size="16" font-weight="700">AFTER THE QUOTE IS APPLIED</text>
+<text x="86" y="288" fill="#21164c" font-size="28" font-weight="700">Your order</text>
+<text x="670" y="288" fill="#21164c" font-size="28" font-weight="700">Your order</text>
+<g fill="#21164c" font-size="22">
+<text x="86" y="348">Items</text><text x="578" y="348" text-anchor="end">£12.95</text>
+<text x="86" y="399">Delivery</text><text x="578" y="399" text-anchor="end" font-size="19">Not yet calculated</text>
+<text x="670" y="348">Items</text><text x="1194" y="348" text-anchor="end">£12.95</text>
+<text x="670" y="399">Estimated delivery</text><text x="1194" y="399" text-anchor="end">£3.95</text>
+</g>
+<text x="86" y="456" fill="#5326a3" font-size="22" font-weight="700" text-decoration="underline">Estimate delivery</text>
+<text x="86" y="490" fill="#605970" font-size="18">Enter your destination to see the cost.</text>
+<line x1="670" x2="1194" y1="438" y2="438" stroke="#d4cde0"/>
+<text x="670" y="482" fill="#21164c" font-size="24" font-weight="700">Estimated total</text>
+<text x="1194" y="482" fill="#21164c" font-size="30" font-weight="700" text-anchor="end">£16.90</text>
+<text x="670" y="519" fill="#605970" font-size="17">Confirm delivery with your full address at checkout.</text>
+<rect x="86" y="555" width="492" height="57" rx="8" fill="#21164c"/>
+<rect x="670" y="555" width="524" height="57" rx="8" fill="#21164c"/>
+<text x="332" y="591" text-anchor="middle" fill="#ffffff" font-size="20" font-weight="700">Continue to checkout</text>
+<text x="932" y="591" text-anchor="middle" fill="#ffffff" font-size="20" font-weight="700">Continue to checkout</text>
+<text x="56" y="699" fill="#f5f2ff" font-size="19">The estimate link names its purpose. The total keeps the same meaning throughout the flow.</text>
+<text x="56" y="731" fill="#bab7d8" font-size="17">Example figures come from the observed one-diary basket. This layout is a suggestion to test.</text>
+</g></svg>
