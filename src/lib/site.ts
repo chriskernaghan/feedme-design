@@ -70,10 +70,29 @@ export function formatDate(d: Date) {
   });
 }
 
-// Where an article lives. A `path` in the front matter wins, otherwise /articles/<filename>/.
+// Articles carried over from the original feedme.design. They were published at the root of the
+// site (/<slug>/), and other sites still link to those addresses, so they keep them. Add a filename
+// (without .md) here to keep any other old article at its original root address.
+const ROOT_URL_IDS = new Set([
+  'apples-ipad-pro-ad-hits-a-cultural-wall-in-japan',
+  'canvas-price-hike-a-risky-bet-that-could-alienate-its-core-users',
+  'design-cuts-shuts-down-overnight-what-went-wrong',
+  'how-the-nuance-audio-glasses-are-changing-hearing-aid-technology',
+  'tesla-has-a-design-problem',
+  'the-iconic-vaio-logo-a-study-in-minimalist-perfection',
+  'the-motorola-razr-v3-a-cool-phone-before-smartphones-took-over',
+  'the-power-of-a-yellow-rectangle-how-national-geographics-logo-became-a-window-to-the-world',
+  'the-war-on-visual-smog-decluttering-public-spaces-in-europe',
+  'ux-design-trends-to-watch-in-2025',
+]);
+
+// Where an article lives. A `path` in the front matter wins, then the root address for carried-over
+// articles, otherwise /articles/<filename>/.
 export function articleUrl(article: { id: string; data: { path?: string } }) {
   const custom = article.data.path?.replace(/^\/+|\/+$/g, '');
-  return custom ? `/${custom}/` : `/articles/${article.id}/`;
+  if (custom) return `/${custom}/`;
+  if (ROOT_URL_IDS.has(article.id)) return `/${article.id}/`;
+  return `/articles/${article.id}/`;
 }
 
 export function readingTime(body: string | undefined) {
