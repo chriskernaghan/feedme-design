@@ -257,3 +257,20 @@ a:hover { color: var(--pink-text); }
   .site-header nav ul { gap: 0; }
   .site-header nav a { padding: 0.35rem 0.6rem; }
 }
+
+/* subscribe modal */
+.subscribe { border: 0; padding: 0; border-radius: 1.25rem; width: min(34rem, calc(100vw - 2rem)); max-height: calc(100dvh - 2rem); overflow: auto; background: #fff; color: #231b6b; box-shadow: 0 24px 60px rgba(8, 9, 12, 0.45); }
+.subscribe::backdrop { background: rgba(8, 9, 12, 0.6); }
+.subscribe-body { padding: 2rem 1.75rem 1.5rem; }
+.subscribe-lockup { display: flex; align-items: center; gap: 0.6rem; margin: 0 0 1rem; font-size: 0.95rem; }
+.subscribe-lockup .x { color: #6b6592; }
+.subscribe h2 { font-family: var(--display); font-size: 1.55rem; line-height: 1.15; margin: 0 0 0.75rem; color: #231b6b; }
+.subscribe p { color: #3d3770; line-height: 1.55; }
+.subscribe-slot { margin: 1.25rem 0 1rem; min-height: 320px; }
+.subscribe-alt { font-size: 0.9rem; margin: 0; }
+.subscribe a { color: #231b6b; }
+.subscribe-close { position: absolute; top: 0.75rem; right: 0.75rem; width: 2.25rem; height: 2.25rem; display: grid; place-items: center; border: 0; border-radius: 50%; background: #f1effa; color: #231b6b; cursor: pointer; }
+.subscribe-close:hover { background: #e3e0f5; }
+body:has(dialog[open]) { overflow: hidden; }
+.subscribe-lockup svg { width: 2.4rem; height: 2.4rem; flex: none; }
+.subscribe-lockup strong { white-space: nowrap; }
