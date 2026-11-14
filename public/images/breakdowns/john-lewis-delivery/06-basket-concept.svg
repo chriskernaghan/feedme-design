@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+<title id="title">Keep the current delivery cost in view</title><desc id="desc">An illustrative basket summary using the observed forty pound item and four pound fifty delivery charge. The estimated total is forty-four pounds fifty. Final delivery depends on checkout options.</desc>
+<rect width="1200" height="900" fill="#111027"/>
+<g font-family="Arial, sans-serif">
+<text x="64" y="65" fill="#ff478f" font-size="24" font-weight="700">feedme.design / UI concept</text>
+<text x="64" y="124" fill="#f4f1ff" font-size="40" font-weight="700">Keep the current purchase easy to price.</text>
+<text x="64" y="166" fill="#c4bfe0" font-size="23">Repeat the delivery information beside the basket total.</text>
+<rect x="64" y="212" width="650" height="604" rx="18" fill="#fff"/>
+<text x="102" y="269" fill="#17152b" font-size="29" font-weight="700">Your basket</text>
+<text x="102" y="317" fill="#575269" font-size="21">1 × Wave Fur Cushion, Cocoa</text>
+<path d="M102 345 H676" stroke="#ddd9e7"/>
+<text x="102" y="388" fill="#17152b" font-size="23">Items</text><text x="676" y="388" text-anchor="end" fill="#17152b" font-size="23">£40.00</text>
+<text x="102" y="432" fill="#17152b" font-size="23">Standard delivery*</text><text x="676" y="432" text-anchor="end" fill="#17152b" font-size="23">£4.50</text>
+<rect x="90" y="463" width="598" height="75" rx="8" fill="#ece7ff"/>
+<text x="106" y="510" fill="#27205b" font-size="25" font-weight="700">Indicative delivered total</text><text x="672" y="510" text-anchor="end" fill="#27205b" font-size="28" font-weight="700">£44.50</text>
+<text x="102" y="574" fill="#575269" font-size="18">*Published product-page charge. Confirm the service</text><text x="102" y="600" fill="#575269" font-size="18">and delivery address at checkout.</text>
+<text x="102" y="647" fill="#17152b" font-size="21">Free Click &amp; Collect is also available.</text>
+<text x="102" y="689" fill="#575269" font-size="18">Spend £10 more to qualify for free standard delivery.</text>
+<rect x="102" y="721" width="574" height="56" rx="5" fill="#27205b"/><text x="389" y="757" fill="#fff" font-size="22" text-anchor="middle">Continue to checkout</text>
+<text x="770" y="302" fill="#ffdb48" font-size="23" font-weight="700">The change</text>
+<text x="770" y="348" fill="#f4f1ff" font-size="23">The shopper can compare</text><text x="770" y="382" fill="#f4f1ff" font-size="23">this purchase with the</text><text x="770" y="416" fill="#f4f1ff" font-size="23">offer to spend more.</text>
+<text x="770" y="500" fill="#c4bfe0" font-size="21">This is a proposal.</text><text x="770" y="533" fill="#c4bfe0" font-size="21">It has not been tested.</text>
+<text x="770" y="599" fill="#c4bfe0" font-size="21">Use live basket rules</text><text x="770" y="632" fill="#c4bfe0" font-size="21">for a real implementation.</text>
+<text x="64" y="864" fill="#c4bfe0" font-size="18">Illustrative concept • 14 November 2026 • Not a John Lewis screen or a confirmed delivery quote</text>
+</g></svg>
