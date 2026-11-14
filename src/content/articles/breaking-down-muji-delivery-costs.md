@@ -19,7 +19,7 @@ sources:
     publisher: 'MUJI UK'
     url: 'https://uk.muji.eu/checkout'
     accessed: 2026-11-14
-draft: true
+draft: false
 ---
 
 A £12.95 diary is a small purchase. Delivery can still change how someone judges its price. We followed one item through [MUJI’s UK shop](https://uk.muji.eu/products/2027-Monthly-and-Weekly-Diary-with-Rokuy-A5-P-22182-H-000000) to see when a shopper could find the delivery charge and work out the amount they would pay.
