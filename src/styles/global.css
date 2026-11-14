@@ -281,7 +281,7 @@ body:has(dialog[open]) { overflow: hidden; }
 .menu-toggle .icon-close { display: none; }
 .menu-toggle[aria-expanded='true'] .icon-open { display: none; }
 .menu-toggle[aria-expanded='true'] .icon-close { display: block; }
-@media (max-width: 56rem) {
+@media (max-width: 66rem) {
   .header-inner { flex-wrap: wrap; gap: 0.4rem; }
   .wordmark { margin-right: auto; font-size: 1.1rem; gap: 0.4rem; }
   .wordmark svg { width: 1.7rem; height: 1.7rem; }

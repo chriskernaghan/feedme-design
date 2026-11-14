@@ -5,7 +5,10 @@ import PageHead from '../components/PageHead.astro';
 import Avatar from '../components/Avatar.astro';
 import { SITE } from '../lib/site';
 
-const authors = (await getCollection('authors')).sort((a, b) => a.data.name.localeCompare(b.data.name));
+// The owner is listed first, then the writers in alphabetical order.
+const authors = (await getCollection('authors')).sort((a, b) =>
+  a.id === 'chris-kernaghan' ? -1 : b.id === 'chris-kernaghan' ? 1 : a.data.name.localeCompare(b.data.name),
+);
 ---
 
 <BaseLayout title="About" description="Who writes feedme.design and what we cover.">
@@ -15,10 +18,10 @@ const authors = (await getCollection('authors')).sort((a, b) => a.data.name.loca
       We focus on the parts of the shopping journey where design decisions turn into revenue, such as product pages, search, navigation, checkout and trust signals, and we try to explain them with evidence rather than opinion.
     </p>
     <p>
-      Our writers publish under pseudonyms, which lets each of them write openly about shops and platforms they may also work alongside. What we ask in return is that every piece shows its working, so you can judge the findings without needing to know who produced them. The details are on our <a href="/methodology/">methodology page</a>.
+      feedme.design is owned and published by <a href="/authors/chris-kernaghan/">Chris Kernaghan</a>. Most of our writers publish under pseudonyms, which lets them write openly about shops and platforms they may also work alongside. What we ask in return is that every piece shows its working, so you can judge the findings without needing to know who produced them. The details are on our <a href="/methodology/">methodology page</a>.
     </p>
 
-    <h2>The writers</h2>
+    <h2>Who's behind it</h2>
     <ul class="footer-list" style="list-style: none; padding: 0; display: grid; gap: 1rem;">
       {authors.map((a) => (
         <li style="display: flex; gap: 0.9rem; align-items: flex-start;">
@@ -29,6 +32,6 @@ const authors = (await getCollection('authors')).sort((a, b) => a.data.name.loca
     </ul>
 
     <h2>Get in touch</h2>
-    <p>Corrections, data requests and story tips are all welcome. Add your contact route here before launch.</p>
+    <p>Corrections, data requests and story tips are all welcome.</p>
   </div>
 </BaseLayout>
