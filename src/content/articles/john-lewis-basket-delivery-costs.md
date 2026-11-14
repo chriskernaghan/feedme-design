@@ -15,7 +15,7 @@ sources:
     publisher: 'John Lewis & Partners'
     url: 'https://www.johnlewis.com/basket'
     accessed: 2026-11-14
-draft: true
+draft: false
 ---
 
 John Lewis answers a useful question before you add this cushion to your basket: what will delivery cost? Its product page gives a starting price beside the purchase controls. Open the delivery drawer and the standard charge is clear.

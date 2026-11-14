@@ -6,7 +6,7 @@ author: editor-one
 type: breakdown
 topics: [checkout, mobile]
 keyFinding: 'Placeholder: the single most useful thing a reader will learn from this teardown goes here.'
-draft: false
+draft: true
 ---
 
 Placeholder article. When this is researched, it will walk through one real checkout on a phone, from basket to confirmation, and record the device, browser, country and date of the walkthrough.
