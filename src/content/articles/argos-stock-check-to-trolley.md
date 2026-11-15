@@ -9,7 +9,7 @@ keyFinding: 'Keep the chosen collection store visible through optional offers so
 sources: []
 # Source links await editorial confirmation; see SOURCES-TO-CONFIRM.md.
 # Old URL: none. This is a new article, not a restoration.
-draft: true
+draft: false
 ---
 
 A product being available somewhere doesn't tell a shopper whether they can collect it from a useful location. Argos addresses that question on the product page, where its stock checker leads into a list of stores with collection timings.
