@@ -8,7 +8,7 @@ topics: [product-page]
 path: /the-apple-vision-pro-is-the-next-newton-an-expensive-leap-into-obsolescence
 keyFinding: 'Before investing in immersive shopping, test whether it answers a specific product question better than your existing page.'
 sources: []
-draft: true
+draft: false
 ---
 
 Apple introduced Vision Pro in June 2023 with a three-dimensional interface controlled through eyes, hands, and voice. It was an invitation to rethink what a screen could be, which also makes it tempting to rethink what an online shop could look like.
