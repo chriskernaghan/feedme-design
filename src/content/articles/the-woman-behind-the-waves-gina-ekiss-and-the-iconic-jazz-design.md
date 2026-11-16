@@ -2,13 +2,13 @@
 title: 'Gina Ekiss, the Jazz design, and what packaging brings to an online shop'
 description: 'The Jazz cup offers a useful prompt for retailers to examine how distinctive packaging survives in product photography and listing thumbnails.'
 pubDate: 2026-11-14
-author: editor-one
+author: editor-three
 type: insight
 topics: [product-page]
 path: /the-woman-behind-the-waves-gina-ekiss-and-the-iconic-jazz-design
 keyFinding: 'Make a product recognisable in its smallest listing image, while keeping the information customers need to choose the right variant clear.'
 sources: []
-draft: true
+draft: false
 ---
 
 The teal and purple strokes of the Jazz cup became recognisable far beyond the disposable tableware they decorated. In 2015, reporting brought attention to Gina Ekiss, the Sweetheart designer credited with creating the pattern, after an online search for the person behind it.
