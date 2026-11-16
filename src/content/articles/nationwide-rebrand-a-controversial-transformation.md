@@ -8,7 +8,7 @@ topics: [checkout]
 path: /nationwide-rebrand-a-controversial-transformation
 keyFinding: 'Review a rebrand across a complete purchase, because a new identity has to make sense wherever a customer encounters the business.'
 sources: []
-draft: true
+draft: false
 ---
 
 When Nationwide announced its new identity in October 2023, the work extended beyond a replacement logo. Its announcement described changes across branches, payment cards, and customer communications as part of its largest image overhaul since 1987.
