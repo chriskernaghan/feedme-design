@@ -19,7 +19,7 @@ sources:
     publisher: 'Baymard Institute'
     url: 'https://baymard.com/research-articles/ecommerce-quantitative-ux-insights-2026'
     accessed: 2026-11-16
-draft: false
+draft: true
 ---
 
 Your campaign calendar may show a manageable number of emails, while a customer receives several more through automated journeys that never appear on it.
