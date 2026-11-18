@@ -1,7 +1,7 @@
 ---
 title: 'Seven checkout mistakes you can spot in five minutes'
 description: 'Seven checkout problems you can find with a phone and a test order, what each one looks like, and what to do about it.'
-pubDate: 2026-11-17
+pubDate: 2026-11-11
 author: editor-one
 type: insight
 topics: [checkout, mobile, product-page]
