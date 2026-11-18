@@ -1,7 +1,7 @@
 ---
 title: 'Eight ways shops make delivery costs hard to find'
 description: 'Eight patterns that hide delivery costs from shoppers, with real examples from MUJI and John Lewis and a simple fix for each one.'
-pubDate: 2026-11-17
+pubDate: 2026-11-12
 author: editor-one
 type: insight
 topics: [product-page, checkout]
