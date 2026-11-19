@@ -1,0 +1,166 @@
+---
+// Google Tag Manager only loads after a visitor accepts analytics.
+// Until then (or if they decline) nothing is sent to Google and no analytics cookies are set.
+const GTM_ID = 'GTM-MJ6JWTVD';
+---
+
+<div id="cookie-banner" class="cookie-banner" role="region" aria-label="Analytics choice" hidden>
+  <p>
+    We'd like to use Google Analytics to see which pages get read, so we can improve the site. It sets cookies and sends data to Google, and it only runs if you accept.{' '}<a href="/privacy/">Read our privacy page</a>.
+  </p>
+  <div class="cookie-actions">
+    <button type="button" class="cookie-btn cookie-accept" data-consent="granted">Accept analytics</button>
+    <button type="button" class="cookie-btn cookie-decline" data-consent="denied">Decline</button>
+  </div>
+</div>
+
+<script is:inline define:vars={{ gtmId: GTM_ID }}>
+  (function () {
+    var KEY = 'feedme-analytics-consent';
+    var banner = document.getElementById('cookie-banner');
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { window.dataLayer.push(arguments); }
+
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
+    });
+
+    function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+    function write(value) { try { localStorage.setItem(KEY, value); } catch (e) {} }
+
+    var loaded = false;
+    function loadGtm() {
+      if (loaded) return;
+      loaded = true;
+      window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtm.js?id=' + gtmId;
+      document.head.appendChild(s);
+    }
+
+    function clearGaCookies() {
+      var host = location.hostname;
+      var parts = host.split('.');
+      var domains = [host, '.' + host, '.' + parts.slice(-2).join('.')];
+      document.cookie.split(';').forEach(function (c) {
+        var name = c.split('=')[0].trim();
+        if (/^_ga/.test(name)) {
+          domains.forEach(function (d) {
+            document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=' + d;
+          });
+          document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+        }
+      });
+    }
+
+    function apply(choice) {
+      if (choice === 'granted') {
+        gtag('consent', 'update', { analytics_storage: 'granted' });
+        loadGtm();
+      } else {
+        gtag('consent', 'update', { analytics_storage: 'denied' });
+        clearGaCookies();
+      }
+    }
+
+    var stored = read();
+    if (stored === 'granted' || stored === 'denied') {
+      apply(stored);
+    } else if (banner) {
+      banner.hidden = false;
+    }
+
+    if (banner) {
+      banner.addEventListener('click', function (e) {
+        var btn = e.target.closest('[data-consent]');
+        if (!btn) return;
+        var choice = btn.getAttribute('data-consent');
+        write(choice);
+        apply(choice);
+        banner.hidden = true;
+      });
+    }
+
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest('[data-cookie-settings]');
+      if (!link || !banner) return;
+      e.preventDefault();
+      banner.hidden = false;
+      var first = banner.querySelector('button');
+      if (first) first.focus();
+    });
+  })();
+</script>
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    z-index: 50;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    max-width: 46rem;
+    margin-inline: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.9rem 1.5rem;
+    padding: 1rem 1.25rem;
+    background: #231b6b;
+    color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(10, 8, 40, 0.35);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .cookie-banner[hidden] {
+    display: none;
+  }
+  .cookie-banner p {
+    margin: 0;
+    flex: 1 1 22rem;
+  }
+  .cookie-banner a {
+    color: #c3b5ff;
+    text-decoration: underline;
+  }
+  .cookie-actions {
+    display: flex;
+    gap: 0.6rem;
+    flex: 0 0 auto;
+  }
+  .cookie-btn {
+    font: inherit;
+    font-weight: 700;
+    min-height: 2.75rem;
+    padding: 0.5rem 1.15rem;
+    border: 0;
+    border-radius: 999px;
+    color: #231b6b;
+    cursor: pointer;
+  }
+  .cookie-accept {
+    background: #35e0a1;
+  }
+  .cookie-decline {
+    background: #c3b5ff;
+  }
+  .cookie-btn:focus-visible,
+  .cookie-banner a:focus-visible {
+    outline: 3px solid #ffd84d;
+    outline-offset: 2px;
+  }
+  @media (max-width: 36rem) {
+    .cookie-actions {
+      width: 100%;
+    }
+    .cookie-btn {
+      flex: 1;
+    }
+  }
+</style>
