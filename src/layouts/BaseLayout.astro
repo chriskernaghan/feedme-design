@@ -3,6 +3,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SubscribeModal from '../components/SubscribeModal.astro';
+import Analytics from '../components/Analytics.astro';
 
 interface Props {
   title: string;
@@ -29,6 +30,7 @@ const props = Astro.props;
       </div>
     </main>
     <Footer />
-   <SubscribeModal />
+    <SubscribeModal />
+    <Analytics />
   </body>
 </html>
