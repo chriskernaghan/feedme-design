@@ -2,7 +2,7 @@
 title: 'Gina Ekiss, the Jazz design, and what packaging brings to an online shop'
 description: 'The Jazz cup offers a useful prompt for retailers to examine how distinctive packaging survives in product photography and listing thumbnails.'
 pubDate: 2026-11-14
-author: Chris Kernaghan
+author: chris-kernaghan
 type: insight
 topics: [product-page]
 path: /the-woman-behind-the-waves-gina-ekiss-and-the-iconic-jazz-design
